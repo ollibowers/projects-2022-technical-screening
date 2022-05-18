@@ -34,3 +34,10 @@ def test_annoying_uoc():
 def test_cross_discipline():
     assert is_unlocked(["COMP1911", "MTRN2500"], "COMP2121") == True
     assert is_unlocked(["COMP1521"], "COMP2121") == True
+
+def test_9302():
+    # "(COMP6441 OR COMP6841) AND 12 units of credit in (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)"
+    assert is_unlocked(["COMP6841", "COMP6843"], "COMP9302") == False
+    assert is_unlocked(["COMP6841", "COMP6843", "COMP6845"], "COMP9302") == True
+    assert is_unlocked(["COMP6841", "COMP6843", "COMP6845", "COMP6447"], "COMP9302") == True
+

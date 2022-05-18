@@ -15,6 +15,8 @@ in how you would approach a problem like this.
 """
 import json
 
+from process_condition import processCondition
+
 # NOTE: DO NOT EDIT conditions.json
 with open("./conditions.json") as f:
     CONDITIONS = json.load(f)
@@ -30,9 +32,22 @@ def is_unlocked(courses_list, target_course):
     You can assume all courses are worth 6 units of credit
     """
     
-    # TODO: COMPLETE THIS FUNCTION!!!
-    
-    return True
+    # process the condition into a Prereq Rule object
+    rule = processCondition(CONDITIONS[target_course])
+    print(rule)
+
+    # evaluate the rule
+    courses_list_lower = list(map(lambda code: code.lower(), courses_list))
+    return rule.check(set(courses_list_lower))
+
+if __name__ == "__main__":
+    for condition in CONDITIONS.values():
+        print(processCondition(condition))
+        print()
+
+    print()
+    print()
+    print(processCondition(CONDITIONS["COMP3900"]))
 
 
 
